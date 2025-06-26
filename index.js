@@ -10,6 +10,9 @@ app.use(cors({
   allowedHeaders: ['Content-Type']
 }));
 
+app.options('*', cors()); // <-- línea que permite solicitudes OPTIONS
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/personas', personasRouter);
