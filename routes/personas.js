@@ -5,8 +5,9 @@ const db = require('../db');
 router.post('/registrar', (req, res) => {
   const { cedula, nombres, apellidos, correo, telefono, direccion, tipo } = req.body;
 
-  const sql = \`INSERT INTO personas (cedula_per, nombres_per, apellidos_per, correo_per, telefono_per, direccion_per, tipo_per)
-               VALUES (?, ?, ?, ?, ?, ?, ?)\`;
+  const sql = `INSERT INTO personas (cedula_per, nombres_per, apellidos_per, correo_per, telefono_per, direccion_per, tipo_per)
+             VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
 
   db.query(sql, [cedula, nombres, apellidos, correo, telefono, direccion, tipo], (err, result) => {
     if (err) {
