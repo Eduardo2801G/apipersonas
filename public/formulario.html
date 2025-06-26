@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Persona</title>
+</head>
+<body>
+  <h2>Formulario de Registro</h2>
+  <form id="formPersona">
+    <input name="cedula" placeholder="Cédula" required><br>
+    <input name="nombres" placeholder="Nombres" required><br>
+    <input name="apellidos" placeholder="Apellidos" required><br>
+    <input name="correo" placeholder="Correo" type="email"><br>
+    <input name="telefono" placeholder="Teléfono"><br>
+    <input name="direccion" placeholder="Dirección"><br>
+    <select name="tipo" required>
+      <option>Administrador</option>
+      <option>Empleado</option>
+      <option>Cliente</option>
+    </select><br><br>
+    <button type="submit">Registrar</button>
+  </form>
+
+  <script>
+    document.getElementById('formPersona').addEventListener('submit', async e => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      const data = Object.fromEntries(form.entries());
+
+      const res = await fetch('/api/personas/registrar', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      alert(result.mensaje);
+    });
+  </script>
+</body>
+</html>
